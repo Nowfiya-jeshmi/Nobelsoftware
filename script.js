@@ -7,11 +7,6 @@ if (cursor) {
   });
 }
 
-
-// =========================================================
-// MOBILE MENU
-// =========================================================
-
 const menu = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 
@@ -22,43 +17,27 @@ if (menu) {
   });
 }
 
-document.querySelectorAll(".nav a").forEach(a => {
-  a.addEventListener("click", () => {
-    nav.classList.remove("open");
-  });
-});
-
-
-// =========================================================
-// SCROLL REVEAL ANIMATION
-// =========================================================
+document.querySelectorAll(".nav a").forEach(a =>
+  a.addEventListener("click", () => nav.classList.remove("open"))
+);
 
 const observer = new IntersectionObserver((entries, obs) => {
-
   entries.forEach(entry => {
-
     if (entry.isIntersecting) {
-
       entry.target.classList.add("visible");
-
       obs.unobserve(entry.target);
-
     }
-
   });
+}, { threshold: 0.12 });
 
-}, {
-  threshold: 0.12
-});
-
-document.querySelectorAll(".reveal").forEach(el => {
-  observer.observe(el);
-});
+document.querySelectorAll(".reveal").forEach(el =>
+  observer.observe(el)
+);
 
 
-// =========================================================
+// ==========================================
 // NUMBER COUNTER ANIMATION
-// =========================================================
+// ==========================================
 
 const counters = document.querySelectorAll("[data-count]");
 
@@ -76,7 +55,8 @@ const countObserver = new IntersectionObserver(entries => {
     const duration = 1500;
     const start = performance.now();
 
-    const isDecimal = String(el.dataset.count).includes(".");
+    const isDecimal =
+      String(el.dataset.count).includes(".");
 
     function update(now) {
 
@@ -85,9 +65,11 @@ const countObserver = new IntersectionObserver(entries => {
         1
       );
 
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased =
+        1 - Math.pow(1 - progress, 3);
 
-      const value = target * eased;
+      const value =
+        target * eased;
 
       if (isDecimal) {
 
@@ -132,17 +114,18 @@ counters.forEach(el => {
 });
 
 
-// =========================================================
+// ==========================================
 // SMOOTH SCROLL
-// =========================================================
+// ==========================================
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 
   link.addEventListener("click", e => {
 
-    const target = document.querySelector(
-      link.getAttribute("href")
-    );
+    const target =
+      document.querySelector(
+        link.getAttribute("href")
+      );
 
     if (!target) return;
 
@@ -205,21 +188,21 @@ techFilters.forEach(filter => {
 
     filter.classList.add("active");
 
-    showCategory(filter.dataset.category);
+    showCategory(
+      filter.dataset.category
+    );
 
   });
 
 });
 
 
-// Show Frontend when page loads
-
 showCategory("frontend");
 
 
-// =========================================================
+// ==========================================
 // DARK / LIGHT THEME TOGGLE
-// =========================================================
+// ==========================================
 
 const themeToggle =
   document.getElementById("themeToggle");
@@ -270,15 +253,7 @@ if (themeToggle && themeIcon) {
 
 
 // =========================================================
-// 🤖 NOBEL AI WEBSITE ROBOT
-// =========================================================
-// Website-aware assistant
-// - Robot eye tracking
-// - Current section detection
-// - Chat window
-// - Quick questions
-// - Website knowledge
-// - Mobile compatible
+// 🤖 NOBEL AI REAL AI ASSISTANT
 // =========================================================
 
 (() => {
@@ -305,16 +280,24 @@ if (themeToggle && themeIcon) {
     document.getElementById("aiMessages");
 
   const currentSectionEl =
-    document.getElementById("aiCurrentSection");
+    document.getElementById(
+      "aiCurrentSection"
+    );
 
   const contextEl =
-    document.getElementById("aiContextText");
+    document.getElementById(
+      "aiContextText"
+    );
 
   const eyes =
-    document.querySelectorAll(".ai-eye i");
+    document.querySelectorAll(
+      ".ai-eye i"
+    );
 
 
-  // Stop if robot HTML is not present
+  // ---------------------------------------------------------
+  // Check robot elements
+  // ---------------------------------------------------------
 
   if (
     !robot ||
@@ -329,7 +312,7 @@ if (themeToggle && themeIcon) {
 
 
   // =========================================================
-  // ROBOT EYE / FACE TRACKING
+  // ROBOT EYE TRACKING
   // =========================================================
 
   const trackRobotEyes = (x, y) => {
@@ -338,10 +321,12 @@ if (themeToggle && themeIcon) {
       robotButton.getBoundingClientRect();
 
     const centerX =
-      rect.left + rect.width / 2;
+      rect.left +
+      rect.width / 2;
 
     const centerY =
-      rect.top + rect.height / 2;
+      rect.top +
+      rect.height / 2;
 
 
     const dx =
@@ -367,7 +352,10 @@ if (themeToggle && themeIcon) {
     eyes.forEach(eye => {
 
       eye.style.transform =
-        `translate(${dx * 4}px, ${dy * 3}px)`;
+        `translate(
+          ${dx * 4}px,
+          ${dy * 3}px
+        )`;
 
     });
 
@@ -377,10 +365,12 @@ if (themeToggle && themeIcon) {
   window.addEventListener(
     "mousemove",
     e => {
+
       trackRobotEyes(
         e.clientX,
         e.clientY
       );
+
     },
     {
       passive: true
@@ -389,7 +379,7 @@ if (themeToggle && themeIcon) {
 
 
   // =========================================================
-  // CURRENT WEBSITE SECTION AWARENESS
+  // CURRENT SECTION DETECTION
   // =========================================================
 
   const sectionNames = {
@@ -411,12 +401,11 @@ if (themeToggle && themeIcon) {
   };
 
 
-  const sections =
-    [
-      ...document.querySelectorAll(
-        "main section[id]"
-      )
-    ];
+  const sections = [
+    ...document.querySelectorAll(
+      "main section[id]"
+    )
+  ];
 
 
   let currentSection = "home";
@@ -505,227 +494,7 @@ if (themeToggle && themeIcon) {
 
 
   // =========================================================
-  // NOBEL SOFTWARE WEBSITE KNOWLEDGE
-  // =========================================================
-
-  const siteKnowledge = {
-
-    services:
-      "Nobel Software provides Full Stack Web Development, DevSecOps, Cyber Security, Cloud Engineering, Network Engineering, Data Migration, On-Premises Engineering, and Managed Services & Consulting.",
-
-
-    technologies:
-      "The website highlights technologies and platforms across modern software, cloud and DevOps. Examples shown include React, Next.js, Node.js, GraphQL, Kubernetes, Terraform, GitOps, AWS, Azure, GCP, FinOps, Cisco, SD-WAN, VPN, VMware, Hyper-V, SAN/NAS, ETL and SQL/NoSQL.",
-
-
-    industries:
-      "Nobel Software presents technology solutions for multiple business and enterprise use cases. Scroll through the Industries section to see the specific industries listed on this website.",
-
-
-    process:
-      "The Process section explains how Nobel Software approaches project delivery from discovery and planning through engineering, security, testing, deployment and ongoing support, based on the content presented on this page.",
-
-
-    solutions:
-      "Nobel Software describes its differentiator as combining technology, security and engineering expertise to build reliable digital solutions. The page also highlights an experienced technology team and agile, efficient delivery.",
-
-
-    contact:
-      "You can reach Nobel Software through the Contact section of this website. I can take you there now if you click the Contact button in the navigation, or I can scroll there for you.",
-
-
-    about:
-      "Nobel Software combines technology, security and engineering expertise to build reliable digital solutions for businesses. The site emphasizes secure, scalable engineering and practical technology delivery.",
-
-
-    home:
-      "Nobel Software describes itself as delivering secure, scalable technology solutions across full-stack applications, cloud infrastructure, DevSecOps and cyber security."
-
-  };
-
-
-  // =========================================================
-  // TEXT NORMALIZATION
-  // =========================================================
-
-  const normalize = text => {
-
-    return text
-      .toLowerCase()
-      .replace(
-        /[^a-z0-9\s]/g,
-        " "
-      )
-      .replace(
-        /\s+/g,
-        " "
-      )
-      .trim();
-
-  };
-
-
-  // =========================================================
-  // AI RESPONSE ENGINE
-  // =========================================================
-
-  const getAnswer = question => {
-
-    const q =
-      normalize(question);
-
-
-    if (!q) {
-
-      return "Ask me anything about Nobel Software, such as services, technologies, industries, process or contact.";
-
-    }
-
-
-    // Services
-
-    if (
-      /(service|services|what do you do|offer|solutions do you provide)/
-        .test(q)
-    ) {
-
-      return siteKnowledge.services;
-
-    }
-
-
-    // Technologies
-
-    if (
-      /(technology|technologies|tech stack|stack|tools|framework|frameworks|cloud|devops)/
-        .test(q)
-    ) {
-
-      return siteKnowledge.technologies;
-
-    }
-
-
-    // Industries
-
-    if (
-      /(industry|industries|sector|sectors)/
-        .test(q)
-    ) {
-
-      return siteKnowledge.industries;
-
-    }
-
-
-    // Process
-
-    if (
-      /(process|how do you work|workflow|delivery|deliver)/
-        .test(q)
-    ) {
-
-      return siteKnowledge.process;
-
-    }
-
-
-    // About
-
-    if (
-      /(about|company|who are you|nobel software)/
-        .test(q)
-    ) {
-
-      return siteKnowledge.about;
-
-    }
-
-
-    // Contact
-
-    if (
-      /(contact|email|phone|reach|talk|connect|project|quote)/
-        .test(q)
-    ) {
-
-      return siteKnowledge.contact;
-
-    }
-
-
-    // Cyber Security
-
-    if (
-      /(security|cyber|devsecops|zero trust|penetration|threat)/
-        .test(q)
-    ) {
-
-      return "Cyber Security and DevSecOps are core services on this website. The services section mentions zero-trust architecture, penetration testing, threat intelligence, incident response, compliance, CI/CD security, scanning and infrastructure-as-code.";
-
-    }
-
-
-    // Full Stack
-
-    if (
-      /(full stack|web development|frontend|backend|api|microservices|react|next js|node js|graphql)/
-        .test(q)
-    ) {
-
-      return "Full Stack Web Development is one of the listed services, covering high-performance frontends, backend APIs, microservices and real-time applications. The service card lists React, Next.js, Node.js and GraphQL.";
-
-    }
-
-
-    // Cloud
-
-    if (
-      /(aws|azure|gcp|cloud)/
-        .test(q)
-    ) {
-
-      return "Cloud Engineering is listed as a service, including cloud strategy, migration, cost optimization and managed services across major platforms. AWS, Azure and GCP are shown on the service card.";
-
-    }
-
-
-    // Greetings
-
-    if (
-      /(hello|hi|hey|good morning|good evening)/
-        .test(q)
-    ) {
-
-      return "Hi! 👋 I’m Nobel AI. I can help you explore this website and find the right section or information.";
-
-    }
-
-
-    // Thanks
-
-    if (
-      /(thank|thanks)/
-        .test(q)
-    ) {
-
-      return "You’re welcome! 🤖 If you want, ask me about services, technologies, industries, process or contact.";
-
-    }
-
-
-    // Default
-
-    return `I’m currently viewing the ${
-      sectionNames[currentSection] ||
-      "Home"
-    } section. I can answer questions about the information on this website, especially services, solutions, process, technologies, industries and contact. Try asking “What services do you provide?”`;
-
-  };
-
-
-  // =========================================================
-  // ADD CHAT MESSAGE
+  // ADD MESSAGE
   // =========================================================
 
   const addMessage = (
@@ -908,33 +677,33 @@ if (themeToggle && themeIcon) {
   };
 
 
-  // =========================================================
-  // ROBOT BUTTON
-  // =========================================================
-
   robotButton.addEventListener(
     "click",
     () => {
 
-      chat.classList.contains(
-        "open"
-      )
-        ? closeChat()
-        : openChat();
+      if (
+        chat.classList.contains(
+          "open"
+        )
+      ) {
+
+        closeChat();
+
+      } else {
+
+        openChat();
+
+      }
 
     }
   );
 
-
-  // Close button
 
   closeButton?.addEventListener(
     "click",
     closeChat
   );
 
-
-  // ESC key
 
   document.addEventListener(
     "keydown",
@@ -985,7 +754,36 @@ if (themeToggle && themeIcon) {
 
 
   // =========================================================
-  // HANDLE USER QUESTION
+  // PAGE CONTEXT
+  // =========================================================
+
+  function getPageContext() {
+
+    const activeSection =
+      document.getElementById(
+        currentSection
+      );
+
+
+    if (activeSection) {
+
+      return activeSection
+        .innerText
+        .trim()
+        .slice(0, 12000);
+
+    }
+
+
+    return document.body.innerText
+      .trim()
+      .slice(0, 12000);
+
+  }
+
+
+  // =========================================================
+  // REAL AI REQUEST
   // =========================================================
 
   async function handleQuestion(
@@ -1007,22 +805,80 @@ if (themeToggle && themeIcon) {
     showTyping();
 
 
-    await new Promise(
-      resolve =>
-        setTimeout(
-          resolve,
-          450
-        )
-    );
+    try {
+
+      const response =
+        await fetch(
+          "/api/chat",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+
+              message:
+                question,
+
+              section:
+                sectionNames[
+                  currentSection
+                ] ||
+                currentSection,
+
+              pageContext:
+                getPageContext()
+
+            })
+
+          }
+        );
 
 
-    removeTyping();
+      const data =
+        await response.json();
 
 
-    addMessage(
-      getAnswer(question),
-      "bot"
-    );
+      removeTyping();
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.error ||
+          "AI request failed"
+        );
+
+      }
+
+
+      addMessage(
+        data.reply ||
+        "I couldn't generate a response right now.",
+        "bot"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Nobel AI error:",
+        error
+      );
+
+
+      removeTyping();
+
+
+      addMessage(
+        "I’m having trouble connecting to my AI service right now. Please try again in a moment.",
+        "bot"
+      );
+
+    }
 
   }
 
@@ -1066,10 +922,11 @@ if (themeToggle && themeIcon) {
 
     close: closeChat,
 
-    currentSection: () =>
-      currentSection,
+    currentSection:
+      () => currentSection,
 
-    ask: handleQuestion
+    ask:
+      handleQuestion
 
   };
 
