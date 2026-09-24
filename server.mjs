@@ -214,10 +214,15 @@ ${websiteContext}
 
   } catch (error) {
 
-    console.error(
-      "❌ Nobel AI API error:",
-      error
-    );
+    console.error("======================================");
+    console.error("❌ NOBEL AI OPENAI ERROR");
+    console.error("======================================");
+    console.error("Message:", error?.message);
+    console.error("Status:", error?.status);
+    console.error("Code:", error?.code);
+    console.error("Type:", error?.type);
+    console.error("Name:", error?.name);
+    console.error("======================================");
 
 
     return res.status(500).json({
